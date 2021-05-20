@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {View, StyleSheet, Text, TextInput, FlatList} from 'react-native';
 
 import Button from '../../components/Button';
 import Card from '../../components/Card';
@@ -35,9 +29,11 @@ function Home() {
 
       <Text style={[styles.title, {marginVertical: 50}]}>Skills</Text>
 
-      {mySkills.map((skill, index) => (
-        <Card skill={skill} key={index} />
-      ))}
+      <FlatList
+        data={mySkills}
+        keyExtractor={item => item}
+        renderItem={({item}) => <Card skill={item} />}
+      />
     </View>
   );
 }
