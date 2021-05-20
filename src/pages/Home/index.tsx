@@ -36,13 +36,17 @@ function Home() {
         style={styles.input}
       />
 
-      <Button onPress={handleAddNewSkill} />
+      <Button
+        title="Adicionar"
+        onPress={handleAddNewSkill}
+        activeOpacity={0.4}
+        />
 
       <Text style={[styles.title, {marginVertical: 50}]}>Skills</Text>
 
       <FlatList
         data={mySkills}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
         renderItem={({item}) => <Card skill={item} />}
       />
     </View>
