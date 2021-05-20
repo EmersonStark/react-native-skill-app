@@ -5,8 +5,8 @@ import Button from '../../components/Button';
 import Card from '../../components/Card';
 
 interface skillData {
-  id: String;
-  title: String;
+  id: string;
+  title: string;
   // Optional prop
   date?: Date
 }
@@ -22,6 +22,11 @@ function Home() {
     }
     setMySkills(prevState => [...prevState, data]);
     setNewSkill('');
+  }
+
+
+  function handleRemoveSkill(id: string) {
+    setMySkills(oldState => oldState.filter(skill => skill.id !== id));
   }
 
   return (
@@ -47,7 +52,7 @@ function Home() {
       <FlatList
         data={mySkills}
         keyExtractor={item => String(item.id)}
-        renderItem={({item}) => <Card skill={item} />}
+        renderItem={({item}) => <Card title={item.title} onPress={() => handleRemoveSkill(item.id)} />}
       />
     </View>
   );
