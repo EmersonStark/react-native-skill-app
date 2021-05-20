@@ -4,12 +4,23 @@ import {View, StyleSheet, Text, TextInput, FlatList} from 'react-native';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 
+interface skillData {
+  id: String;
+  title: String;
+  // Optional prop
+  date?: Date
+}
+
 function Home() {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<skillData[]>([]);
 
   function handleAddNewSkill() {
-    setMySkills(prevState => [...prevState, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      title: newSkill
+    }
+    setMySkills(prevState => [...prevState, data]);
     setNewSkill('');
   }
 
@@ -31,7 +42,7 @@ function Home() {
 
       <FlatList
         data={mySkills}
-        keyExtractor={item => item}
+        keyExtractor={item => item.id}
         renderItem={({item}) => <Card skill={item} />}
       />
     </View>
